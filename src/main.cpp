@@ -164,7 +164,7 @@ bool callback_key_down(Viewer &viewer, unsigned char key, int modifiers) {
         viewer.data.clear();
         viewer.core.align_camera_center(P);
         viewer.core.point_size = 11;
-        viewer.data.add_points(P,Eigen::RowVector3d(0,0,0));
+        viewer.data.add_points(P, Eigen::RowVector3d(0,0,0));
     }
 
     if (key == '2') {
@@ -182,7 +182,7 @@ bool callback_key_down(Viewer &viewer, unsigned char key, int modifiers) {
         // Add code for creating a grid
         // Add your code for evaluating the implicit function at the grid points
         // Add code for displaying points and lines
-        // You can use the following guiding example:
+        // You can use the following example:
 
         /*** begin: sphere example, replace (at least partially) with your code ***/
         // Make grid
@@ -234,7 +234,7 @@ bool callback_key_down(Viewer &viewer, unsigned char key, int modifiers) {
             return true;
         }
 
-        igl::per_face_normals(V,F,FN);
+        igl::per_face_normals(V, F, FN);
         viewer.data.set_mesh(V, F);
         viewer.core.show_lines = true;
         viewer.core.show_faces = true;
@@ -260,14 +260,14 @@ int main(int argc, char *argv[]) {
         // Add widgets to the sidebar.
         v.ngui->addGroup("Reconstruction Options");
         v.ngui->addVariable("Resolution", resolution);
-        v.ngui->addButton("Reset Grid",  [&](){
-                // Recreate the grid
-                createGrid();
-                // Switch view to show the grid
-                callback_key_down(v, '3', 0);
+        v.ngui->addButton("Reset Grid", [&](){
+            // Recreate the grid
+            createGrid();
+            // Switch view to show the grid
+            callback_key_down(v, '3', 0);
         });
 
-        // Add more parameters to tweak here...
+        // TODO: Add more parameters to tweak here...
 
         v.screen->performLayout();
         return false;
