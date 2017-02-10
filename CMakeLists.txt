@@ -68,6 +68,12 @@ include_directories(${LIBIGL_INCLUDE_DIRS})
 add_definitions(${LIBIGL_DEFINITIONS})
 
 # Add your project files
-FILE(GLOB SOURCES src/*.cpp)
+# Note: we need some stubs for building to succeed on TravisCI.
+if (TRAVISCI_BUILD)
+    FILE(GLOB SOURCES src/*.cpp src_travisci/*.cpp)
+else (TRAVISCI_BUILD)
+    FILE(GLOB SOURCES src/*.cpp)
+endif (TRAVISCI_BUILD)
+
 add_executable(${PROJECT_NAME}_bin ${SOURCES} ${LIBIGL_EXTRA_SOURCES})
 target_link_libraries(${PROJECT_NAME}_bin ${LIBIGL_LIBRARIES} ${LIBIGL_EXTRA_LIBRARIES})
